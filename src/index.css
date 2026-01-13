@@ -1,0 +1,110 @@
+.hello {
+  display: block; /* Makes the image a block-level element */
+  margin-left: auto;
+  margin-right: auto; /* Centers the block horizontally */
+  width: 100px;
+  height: 100px; /* Or set a fixed width */
+}
+.nav-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Container styles */
+.marquee-container {
+  overflow: hidden; /* Clips the content outside the container */
+  position: relative;
+  width: 100%;
+  padding: 1rem 0; /* Add some vertical padding for visibility */
+  background-color: #eaff00; /* Optional: adds a background color */
+  border-width: 40px;
+  border-color: black;
+  /* Apply the tilt (rotation) to the container */
+  transform: rotate(0deg); /* Adjust the degree value to change the tilt angle */
+  transform-origin: center center; /* Ensure rotation is around the center */
+}
+
+/* Track styles (contains the content) */
+.marquee-track {
+  display: flex;
+  width: max-content; /* Make the width large enough to hold both content copies */
+  animation: marquee-scroll 15s linear infinite; /* Apply the scrolling animation */
+}
+.marquee-track p{
+    color: black;
+    font-weight: bolder;
+    transform: scale(1, 4);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+/* Content styles */
+.marquee-track p {
+  white-space: nowrap; /* Prevents text from wrapping */
+  padding: 0 2rem; /* Spacing between content instances */
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Keyframes for the scrolling animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%); /* Start at the original position */
+  }
+  100% {
+    /* Move left by 50% of the combined width (one full content width) */
+    transform: translateX(-50%); 
+  }
+}
+
+body {
+  /* Ensure body takes full viewport height */
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 0; /* Remove default padding */
+}
+
+body::before {
+  content: '';
+  position: fixed; /* Stays in place when scrolling */
+  top: 0;
+  left: 0;
+  width: 100vw;  /* 100% of viewport width */
+  height: 100vh; /* 100% of viewport height */
+  border: 20px solid #000000; /* Black border */
+  box-sizing: border-box; /* Includes border in 100vw/100vh */
+  z-index: 9999; /* Place above other content */
+  pointer-events: none; /* Allows clicking through the border */
+}
+
+.artificial-stretch {
+  font-family: 'Times New Roman', Times, serif;
+  display: inline-block;
+  transform: scale(2, 6);
+  transform-origin: left center;
+  margin-left: 20rem;
+  margin-top: 6rem;
+}
+
+.hero-image {
+  border-radius: 10px;
+  margin-left: 6rem;
+}
+.img-container {
+  margin: 10px;
+}
+
+.top-bar{  
+  position: sticky;
+  top: 0; /* Stays at the top when scroll position reaches 0 */
+  width: 100%;
+  background-color: white;
+  font-weight: bolder;
+}

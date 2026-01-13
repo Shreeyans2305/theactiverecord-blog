@@ -1,0 +1,10 @@
+
+const Footer = () => {
+  return (
+    <footer>
+        <p>© 2024 The Active Record. All rights reserved.</p>
+    </footer>
+  )
+}
+
+export default Footer
