@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "motion/react"
 import { IoCloseSharp } from "react-icons/io5";
+import { CgDarkMode } from "react-icons/cg";
 
 const sidebarVariants = {
   hidden: { x: "100%" },
@@ -38,6 +39,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             transition={{type: "spring",stiffness: 260,damping: 24}}
           >
             <IoCloseSharp onClick={onClose} className="close"/>
+            <CgDarkMode className="darkmode-icon"/>
             <nav className="sidebar-nav">
               <h2>Home</h2>
               <h2>Categories</h2>

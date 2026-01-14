@@ -5,7 +5,7 @@ import './FlowingMenu.css';
 
 function FlowingMenu({
   items = [],
-  speed = 15,
+  speed = 25,
 //    textColor = '#fff',
 //    bgColor = '#060010',
 //   marqueeBgColor = '#eaff00',

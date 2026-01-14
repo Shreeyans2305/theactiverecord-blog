@@ -23,9 +23,10 @@ const Highlights = () => {
       }}
         className="post-container"
     >
-    <PostCard key={1} post={posts[0]} pw="280px" ph="200px"/>
-    <PostCard key={2} post={posts[1]} pw="280px" ph="200px"/>
-    <PostCard key={3} post={posts[2]} pw="280px" ph="200px"/>
+    <PostCard key={1} post={posts[0]} className="card"/>
+    <PostCard key={2} post={posts[1]} className="card"/>
+    <PostCard key={3} post={posts[2]} className="card"/>
+    <PostCard key={4} post={posts[3]} className="card"/>
     </motion.div>
     </>
   )
