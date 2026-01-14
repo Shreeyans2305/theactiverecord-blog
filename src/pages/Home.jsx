@@ -12,10 +12,7 @@ function Home() {
 };
   return (
     <div className="home-page">
-      <Hero id="navup"/>
-      {/* {posts.map(post => (
-        <PostCard key={post.id} post={post} w="300px" h="400px" pw="280px" ph="200px" />
-      ))} */}
+      <Hero />
       <Highlights />
       <Categories />
       <ComingSoon />

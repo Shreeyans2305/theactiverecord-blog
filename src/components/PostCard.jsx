@@ -4,7 +4,7 @@ function PostCard({ post }) {
   return (
     <motion.div className="tile" whileHover={{ scale: 1.05, backgroundColor:"#eaff00" }}>
     <article>
-      <img src={post.link} alt={post.title} className="ipostcard"/>
+      <img src={post.cover} alt={post.title} className="ipostcard"/>
       <h2>{post.title}</h2>
       <p>{post.excerpt}</p>
       <Link to={`/post/${post.slug}`}>Read more →</Link>

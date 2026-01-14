@@ -1,0 +1,31 @@
+.post-wrapper {
+  max-width: 720px;          /* Perfect reading width */
+  margin: 0 auto;            /* Centers horizontally */
+  padding: 6rem 1.5rem;
+}
+
+.post-wrapper h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.post-meta {
+  color: #888;
+  margin-bottom: 3rem;
+}
+
+.post-wrapper img {
+  width: 100%;
+  margin: 3rem 0;
+  border-radius: 12px;
+}
+
+.post-wrapper p {
+  line-height: 1.8;
+  margin-bottom: 1.6rem;
+}
+
+.post-wrapper h2 {
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}

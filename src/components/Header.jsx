@@ -13,7 +13,7 @@ const Header = () => {
     <div className="top-bar">
     <nav className='navigation'>
       <img src='/tar.jpeg' alt="tar logo" className='hello' onClick={handleButtonClick}></img>
-      <button className='nav-button' onClick={() => setIsOpen(true)}>☰ Menu</button>
+      <button className='nav-button' onClick={() => setIsOpen(true)}>☰</button>
       <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </nav>
     </div>
