@@ -10,18 +10,23 @@ import "./post.css"
 
 const Post = () => {
   const { slug } = useParams()
-  const [content, setContent] = useState("")
-  const [frontmatter, setFrontmatter] = useState(null)
+  const [post, setPost] = useState(null)
 
   useEffect(() => {
-    fetch(`../posts/${slug}.md`)
-      .then(res => res.text())
-      .then(text => {
-        const { data, content } = matter(text)
-        setFrontmatter(data)
-        setContent(content)
-      })
+    const files = import.meta.glob("/src/posts/*.md", { as: "raw" })
+    const loadPost = async () => {
+      const matchKey = Object.keys(files).find(key => key.endsWith(`${slug}.md`))
+      if (!matchKey) return
+      const raw = await files[matchKey]()
+      const { data, content } = matter(raw)
+      setPost({ frontmatter: data, content })
+    }
+    loadPost()
   }, [slug])
+
+  if (!post) return <p>Loading...</p>
+
+  const { frontmatter, content } = post
 
   if (!frontmatter) return null
 
