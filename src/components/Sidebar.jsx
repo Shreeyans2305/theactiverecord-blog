@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react"
 import { IoCloseSharp } from "react-icons/io5";
 import { CgDarkMode } from "react-icons/cg";
-
+import { useNavigate } from 'react-router-dom'
 const sidebarVariants = {
   hidden: { x: "100%" },
   visible: { x: 0 },
@@ -16,6 +16,12 @@ const backdropVariants = {
 }
 
 const Sidebar = ({ isOpen, onClose }) => {
+const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/');
+    onClose();
+  }
   return (
     <AnimatePresence>
       {isOpen && (
@@ -41,7 +47,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             <IoCloseSharp onClick={onClose} className="close"/>
             <CgDarkMode className="darkmode-icon"/>
             <nav className="sidebar-nav">
-              <h2>Home</h2>
+              <h2 onClick={handleButtonClick}>Home</h2>
               <h2>Categories</h2>
               <h2>Shop?</h2>
               <h2>Contact</h2>

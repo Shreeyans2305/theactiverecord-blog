@@ -2,10 +2,10 @@ import FlowingMenu from './FlowingMenu'
 
 const Categories = () => {
   const demoItems = [
-  { link: '#', text: 'Tech', image: 'https://picsum.photos/600/400?random=1' },
-  { link: '#', text: 'Literature', image: 'https://picsum.photos/600/400?random=2' },
-  { link: '#', text: 'Research', image: 'https://picsum.photos/600/400?random=3' },
-  { link: '#', text: 'Miscellaneous', image: 'https://picsum.photos/600/400?random=4' }
+  { link: '#', text: 'Tech', image: '/tech.jpg' },
+  { link: '#', text: 'Literature', image: '/literature1.jpg' },
+  { link: '#', text: 'Research', image: '/research1.jpg' },
+  { link: '#', text: 'Miscellaneous', image: '/miscellaneous.jpg' }
 ];
   return (
     <>

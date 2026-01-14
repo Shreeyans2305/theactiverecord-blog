@@ -206,5 +206,22 @@
 
 .ipostcard{
    width: 250px;
-    height: 250px;
+   height: 250px;
+}
+
+.auto-button{
+  position: fixed;
+  bottom: 2vh;
+  right: 2vh;
+  border-radius: 60%;
+  background-color: black;
+  height: 55px;
+  width: 55px;
+  cursor: pointer;
+}
+
+.uparr{
+  color: white;
+  width: 30px;
+  height: 30px;
 }
