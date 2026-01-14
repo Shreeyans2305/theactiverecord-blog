@@ -1,14 +1,15 @@
 .hello {
-  display: block; /* Makes the image a block-level element */
+  display: flex; /* Makes the image a block-level element */
   margin-left: auto;
   margin-right: auto; /* Centers the block horizontally */
   width: 100px;
   height: 100px; /* Or set a fixed width */
+  justify-content: center;
 }
 .nav-button {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 4vh;
+  right: 5vh;
   padding: 10px 15px;
   font-size: 16px;
   background-color: #ffffff;
@@ -16,6 +17,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-right: 2vh;
 }
 
 /* Container styles */
@@ -30,6 +32,7 @@
   /* Apply the tilt (rotation) to the container */
   transform: rotate(0deg); /* Adjust the degree value to change the tilt angle */
   transform-origin: center center; /* Ensure rotation is around the center */
+  margin-top: 5px;
 }
 
 /* Track styles (contains the content) */
@@ -64,25 +67,7 @@
   }
 }
 
-body {
-  /* Ensure body takes full viewport height */
-  min-height: 100vh;
-  box-sizing: border-box;
-  padding: 0; /* Remove default padding */
-}
 
-body::before {
-  content: '';
-  position: fixed; /* Stays in place when scrolling */
-  top: 0;
-  left: 0;
-  width: 100vw;  /* 100% of viewport width */
-  height: 100vh; /* 100% of viewport height */
-  border: 20px solid #000000; /* Black border */
-  box-sizing: border-box; /* Includes border in 100vw/100vh */
-  z-index: 9999; /* Place above other content */
-  pointer-events: none; /* Allows clicking through the border */
-}
 
 .artificial-stretch {
   font-family: 'Times New Roman', Times, serif;
@@ -103,8 +88,99 @@ body::before {
 
 .top-bar{  
   position: sticky;
+  z-index: 2;
   top: 0; /* Stays at the top when scroll position reaches 0 */
   width: 100%;
   background-color: white;
   font-weight: bolder;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 999em;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
 }
+
+.tile {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px;
+  box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75);
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 300px;
+  height: 500px;
+  margin-left: 40px;
+}
+
+
+.custom-class-1{
+  margin-left: 500px;
+}
+
+.subsection{
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  font-size: 2rem;
+  margin-left: 40px;
+}
+.subsection:hover{
+  text-decoration: underline;
+}
+
+.post-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 280px;
+  background: #111;
+  color: white;
+  z-index: 10001;
+  padding: 2rem;
+}
+
+.sidebar.right {
+  right: 0;
+  border-radius: 20px;
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 10000;
+}
+
+.sidebar-nav h2{
+  font-family: 'Times New Roman', Times, serif;
+  text-decoration: none;
+  color: white;
+}
+.sidebar-nav h2:hover{
+  cursor: pointer;
+}
+
+.close{
+  cursor: pointer;
+  width : 30px;
+  height: 30px;
+}
+
+.soon{
+  position: relative;
+  z-index: 10;
+  font-family: 'Times New Roman', Times, serif;
+  color: whitesmoke;
+}
+
+.soon:hover{
+  color: #eaff00;
+  cursor: pointer;
+}
+
