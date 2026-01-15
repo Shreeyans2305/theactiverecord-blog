@@ -4,8 +4,15 @@ import Post from './pages/Post.jsx'
 import About from './components/About.jsx'
 import Layout from './components/Layout.jsx'
 import Category from './pages/Category.jsx'
+import { useEffect } from 'react'
 import './index.css'
+
 function App() {
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
   return (
     <Layout>
     <Routes>

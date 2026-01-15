@@ -19,7 +19,17 @@ const backdropVariants = {
 }
 
 const Sidebar = ({ isOpen, onClose }) => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
+
+  const handleDarkModeToggle = () => {
+    const newTheme = !isDarkMode ? 'dark' : 'light';
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   const handleButtonClick = (destination) => {
     navigate(destination);
@@ -56,7 +66,7 @@ const navigate = useNavigate();
             transition={{type: "spring",stiffness: 260,damping: 24}}
           >
             <IoCloseSharp onClick={onClose} className="close"/>
-            <CgDarkMode className="darkmode-icon"/>
+            <CgDarkMode onClick={handleDarkModeToggle} className="darkmode-icon"/>
             <nav className="sidebar-nav">
             <ul style={{ listStyleType: "none", padding: 0, margin: 0 }} className="sides">
               <li><h2 onClick={() => {handleButtonClick('/'); goToTop();}} className="side">Home</h2></li>

@@ -6,29 +6,61 @@ import './FlowingMenu.css';
 function FlowingMenu({
   items = [],
   speed = 30,
-//    textColor = '#fff',
-//    bgColor = '#060010',
-//   marqueeBgColor = '#eaff00',
-//   marqueeTextColor = '#060010',
-//  borderColor = '#fff'
-textColor = '#000000ff',
-bgColor = '#ffffffff',
-marqueeBgColor = '#eaff00',
-marqueeTextColor = '#000000ff',
- borderColor = '#000000ff'
+  textColor,
+  bgColor,
+  marqueeBgColor = '#eaff00',
+  marqueeTextColor,
+  borderColor
 }) {
+  const [colors, setColors] = useState({
+    textColor: textColor || '#000000ff',
+    bgColor: bgColor || '#ffffffff',
+    marqueeTextColor: marqueeTextColor || '#000000ff',
+    borderColor: borderColor || '#000000ff'
+  });
+
+  useEffect(() => {
+    const updateColors = () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      const constantMarqueeTextColor = marqueeTextColor || '#000000ff';
+      
+      if (theme === 'dark') {
+        setColors({
+          textColor: '#ffffff',
+          bgColor: '#000000',
+          marqueeTextColor: constantMarqueeTextColor,
+          borderColor: '#ffffff'
+        });
+      } else {
+        setColors({
+          textColor: textColor || '#000000ff',
+          bgColor: bgColor || '#ffffffff',
+          marqueeTextColor: constantMarqueeTextColor,
+          borderColor: borderColor || '#000000ff'
+        });
+      }
+    };
+
+    updateColors();
+    
+    const observer = new MutationObserver(updateColors);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    
+    return () => observer.disconnect();
+  }, [textColor, bgColor, marqueeTextColor, borderColor]);
+
   return (
-    <div className="menu-wrap" style={{ backgroundColor: bgColor }}>
+    <div className="menu-wrap" style={{ backgroundColor: colors.bgColor }}>
       <nav className="menu">
         {items.map((item, idx) => (
           <MenuItem
             key={idx}
             {...item}
             speed={speed}
-            textColor={textColor}
+            textColor={colors.textColor}
             marqueeBgColor={marqueeBgColor}
-            marqueeTextColor={marqueeTextColor}
-            borderColor={borderColor}
+            marqueeTextColor={colors.marqueeTextColor}
+            borderColor={colors.borderColor}
           />
         ))}
       </nav>

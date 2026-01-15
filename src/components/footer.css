@@ -28,8 +28,12 @@
   text-decoration: none;
   font-family: 'Times New Roman', Times, serif;
   color: black;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.3s ease;
   font-size: 50px;
+}
+
+[data-theme="dark"] .footer-socials a {
+  color: white;
 }
 
 .footer-socials a:hover {
@@ -43,4 +47,9 @@
   font-size: 18px;
   color: #555;
   margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .footer-note {
+  color: #aaa;
 }
