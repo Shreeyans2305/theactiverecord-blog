@@ -3,6 +3,9 @@ import { FaGithub } from "react-icons/fa";
 import { MdOutgoingMail } from "react-icons/md";
 import { FaMedium } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { IoPerson } from "react-icons/io5";
+
 import "./footer.css"
 
 const words = ["thoughts?", "reviews?", "questions?"]
@@ -54,9 +57,11 @@ const Footer = () => {
     </div>
     <div className="footer-socials" id="contact">
     <a href="https://github.com/Shreeyans2305" target="_blank" rel="noreferrer" className="link"><FaGithub /></a>
-    <a href="https://twitter.com/yourusername" target="_blank" rel="noreferrer" className="link"><MdOutgoingMail /></a>
-    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer" className="link"><FaMedium /></a>
-    <a href="https://instagram.com/yourusername" target="_blank" rel="noreferrer" className="link"><FaInstagram /></a>
+    <a href="mailto:theactiverecord@gmail.com" target="_blank" rel="noreferrer" className="link"><MdOutgoingMail /></a>
+    <a href="https://medium.com/@theactiverecord" target="_blank" rel="noreferrer" className="link"><FaMedium /></a>
+    <a href="https://www.instagram.com/theactiverecord/" target="_blank" rel="noreferrer" className="link"><FaInstagram /></a>
+    <a href="https://www.linkedin.com/in/shreeyans-vichare/" target="_blank" rel="noreferrer" className="link"><FaLinkedin /></a>
+    <a href="https://shreeyans2305.github.io/" target="_blank" rel="noreferrer" className="link"><IoPerson /></a>
     </div>
     <p className="footer-note">© 2026 The Active Record. All rights reserved.</p>
 
