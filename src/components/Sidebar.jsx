@@ -21,14 +21,20 @@ const backdropVariants = {
 const Sidebar = ({ isOpen, onClose }) => {
 const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    navigate('/');
+  const handleButtonClick = (destination) => {
+    navigate(destination);
     onClose();
   }
+  const goToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth', // Smooth animation
+  });
+  };
   const [categoriesOpen, setCategoriesOpen] = useState(false)
 
   return (
-    <AnimatePresence>
+    <AnimatePresence className="sidebar-animate-presence">
       {isOpen && (
         <>
           {/* Backdrop */}
@@ -52,8 +58,8 @@ const navigate = useNavigate();
             <IoCloseSharp onClick={onClose} className="close"/>
             <CgDarkMode className="darkmode-icon"/>
             <nav className="sidebar-nav">
-            <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-              <li><h2 onClick={handleButtonClick}>Home</h2></li>
+            <ul style={{ listStyleType: "none", padding: 0, margin: 0 }} className="sides">
+              <li><h2 onClick={() => {handleButtonClick('/'); goToTop();}} className="side">Home</h2></li>
               <li>
   <button
     className="category-toggle"
@@ -79,19 +85,19 @@ const navigate = useNavigate();
         transition={{ duration: 0.3, ease: "easeInOut" }}
         style={{ overflow: "hidden" }}
       >
-        <li><h3 onClick={() => navigate("/category/tech")}>Tech</h3></li>
-        <li><h3 onClick={() => navigate("/category/literature")}>Literature</h3></li>
-        <li><h3 onClick={() => navigate("/category/research")}>Research</h3></li>
-        <li><h3 onClick={() => navigate("/category/misc")}>Miscellaneous</h3></li>
+        <li><h3 onClick={() => {handleButtonClick("/category/tech"); goToTop();}} className="side">Tech</h3></li>
+        <li><h3 onClick={() => {handleButtonClick("/category/literature"); goToTop();}} className="side">Literature</h3></li>
+        <li><h3 onClick={() => {handleButtonClick("/category/research"); goToTop();}} className="side">Research</h3></li>
+        <li><h3 onClick={() => {handleButtonClick("/category/misc"); goToTop();}} className="side">Miscellaneous</h3></li>
       </motion.ul>
     )}
   </AnimatePresence>
               </li>
 
-              <li><h2>Shop?</h2></li>
-              <li><h2>Contact</h2></li>
-              <li><h2>Socials</h2></li>
-            </ul>
+              <li><h2 onClick={() => handleButtonClick('/#Shop')}>Shop?</h2></li>
+              <li><h2 onClick={() => handleButtonClick('/#about')}>About</h2></li>
+              <li><h2 onClick={() => handleButtonClick('/#contact')}>Reach Out</h2></li>
+          </ul>
             </nav>
           </motion.aside>
         </>

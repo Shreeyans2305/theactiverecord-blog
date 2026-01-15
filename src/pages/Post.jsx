@@ -1,14 +1,27 @@
 import { Buffer } from "buffer";
 window.Buffer = Buffer;
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import matter from "gray-matter"
-import { motion } from "motion/react"
+import { motion, useScroll, useSpring } from "motion/react"
 import "./post.css"
+import AutoButton from "../components/AutoButton";
 
 const Post = () => {
+
+  const articleRef =  useRef(null);
+  const { scrollYProgress } = useScroll({
+  target: articleRef,
+  offset: ["start start", "end end"],
+})
+
+const scaleX = useSpring(scrollYProgress, {
+  stiffness: 100,
+  damping: 30,
+})
+
   const { slug } = useParams()
   const [post, setPost] = useState(null)
 
@@ -30,8 +43,10 @@ const Post = () => {
 
   if (!frontmatter) return null
 
+
   return (
-    <article className="post-wrapper">
+    <>
+    <article ref={articleRef} className="post-wrapper">
       {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: 40 }}
@@ -70,7 +85,14 @@ const Post = () => {
       >
         {content}
       </ReactMarkdown>
+      <motion.div
+  className="reading-progress"
+  style={{ scaleX }}
+/>
     </article>
+    <AutoButton />
+    </>
+
   )
 }
 

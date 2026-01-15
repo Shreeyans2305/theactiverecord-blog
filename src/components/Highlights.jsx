@@ -9,7 +9,7 @@ const Highlights = () => {
       const ref = useRef(null)
       const isInView = useInView(ref, {
         once: true,
-        margin: "-40% 0px -60% 0px"
+        margin: "-10% 0px -20% 0px"
       })
  const [posts, setPosts] = useState([])
 
@@ -21,7 +21,7 @@ const Highlights = () => {
       for (const path in files) {
       const raw = await files[path]()  // raw is now a string
       const { data } = matter(raw)    // ✅ works now
-      if (data.home) selected.push(data)
+      if (data.featured) selected.push(data)
       }
 
       selected.sort((a, b) => a.order - b.order)
@@ -43,10 +43,6 @@ const Highlights = () => {
       }}
         className="post-container"
     >
-    {/* <PostCard key={1} post={frontmatter} className="card"/> */}
-    {/* <PostCard key={2} post={posts[1]} className="card"/>
-    <PostCard key={3} post={posts[2]} className="card"/>
-    <PostCard key={4} post={posts[3]} className="card"/> */}
     {posts.map(post => (
         <PostCard key={post.slug} post={post} />
       ))}

@@ -3,7 +3,24 @@ import Hero from "../components/Hero.jsx"
 import Categories from "../components/Categories.jsx"
 import ComingSoon from "../components/ComingSoon.jsx"
 import { IoIosArrowRoundUp } from "react-icons/io";
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
+import About from "../components/About.jsx";
+import AutoButton from "../components/AutoButton.jsx";
 function Home() {
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(hash)
+      if (el) {
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+    }
+  }, [hash])
   const goToTop = () => {
   window.scrollTo({
     top: 0,
@@ -16,7 +33,8 @@ function Home() {
       <Highlights />
       <Categories />
       <ComingSoon />
-      <button className="auto-button" onClick={goToTop}><IoIosArrowRoundUp className="uparr"/></button>
+      <About />
+      <AutoButton />
     </div>
   )
 }

@@ -15,7 +15,7 @@ const ComingSoon = () => {
         scale={0.2}
         rotation={0}
     >
-        <h1 className='soon'>The Active Record Shop?? </h1>
+        <h1 className='soon' id='Shop'>The Active Record Shop?? </h1>
         <h2 className='soon'>Work in Progress! Stay Tuned...</h2>
     </Beams>
     </div>

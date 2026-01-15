@@ -1,13 +1,11 @@
-import React from 'react'
 import { motion } from 'motion/react'
-import { useRef } from "react"
 
 const Hero = () => {
 
   return (
     <>
-      <div class="marquee-container">
-      <div class="marquee-track">
+      <div className="marquee-container">
+      <div className="marquee-track">
         <p>GET THE LATEST INSIGHTS RIGHT HERE!!</p>
         <p aria-hidden="true">GET THE LATEST INSIGHTS RIGHT HERE!!</p>
         <p aria-hidden="true">GET THE LATEST INSIGHTS RIGHT HERE!!</p>
@@ -24,7 +22,11 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }
         }
         >
+          <picture>
+            <source media="(max-width: 768px)" className="hero-image-mobile" srcSet="/Hero3.png" />
+            <source media="(max-width: 1200px)" className="hero-image" srcSet="/Hero4.png" />
           <img src="/Hero.png" alt="Hero" className="hero-image" />
+          </picture>
         </motion.div>
     </>
   )
