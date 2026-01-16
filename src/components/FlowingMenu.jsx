@@ -68,7 +68,16 @@ function FlowingMenu({
   );
 }
 
-function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marqueeTextColor, borderColor }) {
+function MenuItem({
+  onClick,
+  text,
+  image,
+  speed,
+  textColor,
+  marqueeBgColor,
+  marqueeTextColor,
+  borderColor
+}) {
   const itemRef = useRef(null);
   const marqueeRef = useRef(null);
   const marqueeInnerRef = useRef(null);
@@ -174,15 +183,19 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
 
   return (
     <div className="menu__item" ref={itemRef} style={{ borderColor }}>
-      <a
-        className="menu__item-link"
-        href={link}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{ color: textColor }}
-      >
-        {text}
-      </a>
+      <div
+  className="menu__item-link"
+  onClick={onClick}
+  onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}
+  style={{ color: textColor, cursor: "pointer" }}
+  role="button"
+  tabIndex={0}
+  onKeyDown={(e) => e.key === "Enter" && onClick?.()}
+>
+  {text}
+</div>
+
       <div className="marquee" ref={marqueeRef} style={{ backgroundColor: marqueeBgColor }}>
         <div className="marquee__inner-wrap">
           <div className="marquee__inner" ref={marqueeInnerRef} aria-hidden="true">
