@@ -5,7 +5,7 @@ date: "2026-01-16"
 author: "Shreeyans Vichare"
 category: "misc"
 tags: ["Memories", "Retrospective", "Thought Provoking","Personal Timeline"]
-excerpt: "How we got to the furthest man made object and what it took to spot our pale blue dot."
+excerpt: "How memories evolve over time and the importance they hold in a person's life."
 cover: "/memories.jpg"
 readingTime: "5 min"
 featured: true
