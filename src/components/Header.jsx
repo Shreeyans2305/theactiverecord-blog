@@ -24,7 +24,7 @@ const Header = () => {
     navigate('/');
   }
 
-  const logoImage = isDarkMode ? '/tar3.jpg' : '/tar5.png';
+  const logoImage = isDarkMode ? '/tar3.jpg' : '/tar.jpeg';
 
   return (
     <>
