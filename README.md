@@ -139,9 +139,9 @@ Toggle available globally via UI.
 ---
 
 ## How you can play around with the code
-1.Clone the repository
-2.Go through src/posts to learn about the structure of the posts
-3.See the pages and routing to figure out the specifics
+* Clone the repository
+* Go through src/posts to learn about the structure of the posts
+* See the pages and routing to figure out the specifics
 
 ---
 
@@ -153,4 +153,5 @@ MIT License
 ---
 
 > *“The record isn’t about perfection — it’s about presence.”*
+
 
