@@ -2,7 +2,6 @@ import Highlights from "../components/Highlights.jsx"
 import Hero from "../components/Hero.jsx"
 import Categories from "../components/Categories.jsx"
 import ComingSoon from "../components/ComingSoon.jsx"
-import { IoIosArrowRoundUp } from "react-icons/io";
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import About from "../components/About.jsx";

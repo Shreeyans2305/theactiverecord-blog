@@ -5,6 +5,7 @@ import About from './components/About.jsx'
 import Layout from './components/Layout.jsx'
 import Category from './pages/Category.jsx'
 import { useEffect } from 'react'
+import { Analytics } from '@vercel/analytics/react';
 import './index.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   }, []);
 
   return (
+    <>
     <Layout>
     <Routes>
       <Route path="/" element={<Home/>} />
@@ -22,6 +24,8 @@ function App() {
       <Route path="/category/:category" element={<Category />} />
     </Routes>
     </Layout>
+    <Analytics />
+    </>
   )
 }
 
