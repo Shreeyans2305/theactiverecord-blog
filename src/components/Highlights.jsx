@@ -1,4 +1,3 @@
-// import { posts } from '../data'
 import PostCard from './PostCard'
 import { motion, useInView } from "motion/react"
 import { useRef } from "react"
@@ -15,12 +14,12 @@ const Highlights = () => {
 
   useEffect(() => {
     const loadPosts = async () => {
-      const files = import.meta.glob("../posts/*.md", { as: "raw" }) // <-- note `as: "raw"`
+      const files = import.meta.glob("../posts/*.md", { as: "raw" }) 
       const selected = []
 
       for (const path in files) {
-      const raw = await files[path]()  // raw is now a string
-      const { data } = matter(raw)    // ✅ works now
+      const raw = await files[path]()
+      const { data } = matter(raw)    
       if (data.featured) selected.push(data)
       }
 
