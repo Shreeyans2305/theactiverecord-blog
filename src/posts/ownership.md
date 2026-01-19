@@ -4,7 +4,7 @@ slug: "ownership"
 date: "2022-03-10"
 author: "Shreeyans Vichare"
 category: "tech"
-tags: ["Teech", "Ownership", "Subscriptions", "Finance"]
+tags: ["Tech", "Ownership", "Subscriptions", "Finance"]
 excerpt: "What is ownership in the 20th century? Question how much of the stuff you use everyday is actually yours."
 cover: "/ownership.jpg"
 readingTime: "3 min"
