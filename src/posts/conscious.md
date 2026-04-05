@@ -6,7 +6,7 @@ author: "Shreeyans Vichare"
 category: "literature"
 tags: ["Fiction", "Classic", "Conscious","Idea", "Expanison"]
 excerpt: "“Sanity is not statistical,”"
-cover: "/1984.png"
+cover: "/conscious.jpg"
 readingTime: "2 min"
 featured: true
 keywords:
