@@ -16,7 +16,7 @@ keywords:
   - Literature
 ---
 
-![PaintingJaySadangi](/conscious.png)
+![PaintingJaySadangi](/conscious.jpg)
 
 ---
 
