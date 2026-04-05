@@ -8,6 +8,7 @@ tags: ["Fiction", "Classic", "Conscious","Idea", "Expanison"]
 excerpt: "“Sanity is not statistical,”"
 cover: "/1984.png"
 readingTime: "2 min"
+featured: true
 keywords:
   - Expansion
   - Classic
