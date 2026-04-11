@@ -1,5 +1,3 @@
-import { Buffer } from "buffer";
-window.Buffer = Buffer;
 import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
 import ReactMarkdown from "react-markdown"
@@ -8,6 +6,13 @@ import matter from "gray-matter"
 import { motion, useScroll, useSpring } from "motion/react"
 import "./post.css"
 import AutoButton from "../components/AutoButton";
+
+const getRawMarkdown = (loaded) => {
+  if (typeof loaded === "string") return loaded
+  if (typeof loaded?.default === "string") return loaded.default
+  if (typeof loaded?.default?.default === "string") return loaded.default.default
+  return ""
+}
 
 const Post = () => {
 
@@ -26,11 +31,13 @@ const scaleX = useSpring(scrollYProgress, {
   const [post, setPost] = useState(null)
 
   useEffect(() => {
-    const files = import.meta.glob("/src/posts/*.md", { query: "?raw", import: "default" })
+    const files = import.meta.glob("/src/posts/*.md", { as: "raw" })
     const loadPost = async () => {
       const matchKey = Object.keys(files).find(key => key.endsWith(`${slug}.md`))
       if (!matchKey) return
-      const raw = await files[matchKey]()
+      const loaded = await files[matchKey]()
+      const raw = getRawMarkdown(loaded)
+      if (!raw) return
       const { data, content } = matter(raw)
       setPost({ frontmatter: data, content })
     }

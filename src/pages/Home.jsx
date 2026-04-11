@@ -55,11 +55,9 @@ function Home() {
   return (
     <div className="home-page">
       <Hero />
-      <DeferredSection minHeight={380}>
-        <Suspense fallback={<div style={{ minHeight: 380 }} />}>
-          <Highlights />
-        </Suspense>
-      </DeferredSection>
+      <Suspense fallback={<div style={{ minHeight: 380 }} />}>
+        <Highlights />
+      </Suspense>
       <DeferredSection minHeight={650}>
         <Suspense fallback={<div style={{ minHeight: 650 }} />}>
           <Categories />

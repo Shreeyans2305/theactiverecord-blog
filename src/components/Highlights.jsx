@@ -1,30 +1,42 @@
 import PostCard from './PostCard'
-import { motion, useInView } from "motion/react"
-import { useRef } from "react"
+import { motion } from "motion/react"
 import matter from "gray-matter"
 import { useEffect, useState } from "react"
 
+const getRawMarkdown = (loaded) => {
+  if (typeof loaded === "string") return loaded
+  if (typeof loaded?.default === "string") return loaded.default
+  if (typeof loaded?.default?.default === "string") return loaded.default.default
+  return ""
+}
+
 const Highlights = () => {
-      const ref = useRef(null)
-      const isInView = useInView(ref, {
-        once: true,
-        margin: "-10% 0px -20% 0px"
-      })
  const [posts, setPosts] = useState([])
+ const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const loadPosts = async () => {
-      const files = import.meta.glob("../posts/*.md", { query: "?raw", import: "default" }) 
-      const selected = []
+      try {
+        const files = import.meta.glob("../posts/*.md", { as: "raw" })
+        const selected = []
 
-      for (const path in files) {
-      const raw = await files[path]()
-      const { data } = matter(raw)    
-      if (data.featured) selected.push(data)
+        for (const path in files) {
+          try {
+            const loaded = await files[path]()
+            const raw = getRawMarkdown(loaded)
+            if (!raw) continue
+            const { data } = matter(raw)
+            if (data.featured) selected.push(data)
+          } catch {
+            continue
+          }
+        }
+
+        selected.sort((a, b) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER))
+        setPosts(selected.slice(0, 4))
+      } finally {
+        setIsLoading(false)
       }
-
-      selected.sort((a, b) => a.order - b.order)
-      setPosts(selected.slice(0, 4))
     }
 
     loadPosts()
@@ -33,18 +45,17 @@ const Highlights = () => {
     <>
     <h2 className="subsection">Latest Blog Entries</h2>
     <motion.div
-      ref={ref}
       initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
         duration: 0.6,
         ease: "easeOut"
       }}
         className="post-container"
     >
-    {posts.map(post => (
+    {posts.length > 0 ? posts.map(post => (
         <PostCard key={post.slug} post={post} />
-      ))}
+      )) : <p>{isLoading ? "Loading latest entries…" : "No featured entries found."}</p>}
     </motion.div>
     </>
   )
