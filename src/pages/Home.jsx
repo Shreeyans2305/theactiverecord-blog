@@ -1,11 +1,42 @@
-import Highlights from "../components/Highlights.jsx"
 import Hero from "../components/Hero.jsx"
-import Categories from "../components/Categories.jsx"
-import ComingSoon from "../components/ComingSoon.jsx"
-import { useEffect } from "react"
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import { useLocation } from "react-router-dom"
-import About from "../components/About.jsx";
 import AutoButton from "../components/AutoButton.jsx";
+
+const Highlights = lazy(() => import("../components/Highlights.jsx"))
+const Categories = lazy(() => import("../components/Categories.jsx"))
+const ComingSoon = lazy(() => import("../components/ComingSoon.jsx"))
+const About = lazy(() => import("../components/About.jsx"))
+
+const DeferredSection = ({ minHeight = 400, children }) => {
+  const holderRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const node = holderRef.current
+    if (!node || isVisible) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: "300px 0px" }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [isVisible])
+
+  return (
+    <section ref={holderRef} style={{ minHeight }}>
+      {isVisible ? children : <div style={{ minHeight }} aria-hidden="true" />}
+    </section>
+  )
+}
+
 function Home() {
   const { hash } = useLocation()
 
@@ -20,19 +51,30 @@ function Home() {
       }
     }
   }, [hash])
-  const goToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth', // Smooth animation
-  });
-};
+
   return (
     <div className="home-page">
       <Hero />
-      <Highlights />
-      <Categories />
-      <ComingSoon />
-      <About />
+      <DeferredSection minHeight={380}>
+        <Suspense fallback={<div style={{ minHeight: 380 }} />}>
+          <Highlights />
+        </Suspense>
+      </DeferredSection>
+      <DeferredSection minHeight={650}>
+        <Suspense fallback={<div style={{ minHeight: 650 }} />}>
+          <Categories />
+        </Suspense>
+      </DeferredSection>
+      <DeferredSection minHeight={650}>
+        <Suspense fallback={<div style={{ minHeight: 650 }} />}>
+          <ComingSoon />
+        </Suspense>
+      </DeferredSection>
+      <DeferredSection minHeight={520}>
+        <Suspense fallback={<div style={{ minHeight: 520 }} />}>
+          <About />
+        </Suspense>
+      </DeferredSection>
       <AutoButton />
     </div>
   )

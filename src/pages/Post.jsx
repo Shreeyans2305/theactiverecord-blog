@@ -26,7 +26,7 @@ const scaleX = useSpring(scrollYProgress, {
   const [post, setPost] = useState(null)
 
   useEffect(() => {
-    const files = import.meta.glob("/src/posts/*.md", { as: "raw" })
+    const files = import.meta.glob("/src/posts/*.md", { query: "?raw", import: "default" })
     const loadPost = async () => {
       const matchKey = Object.keys(files).find(key => key.endsWith(`${slug}.md`))
       if (!matchKey) return
@@ -67,6 +67,8 @@ const scaleX = useSpring(scrollYProgress, {
           img: ({ node, ...props }) => (
             <motion.img
               {...props}
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}

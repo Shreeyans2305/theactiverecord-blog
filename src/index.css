@@ -109,6 +109,10 @@ html, body {
 }
 
 .hero-image {
+  width: min(100%, 1200px);
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: 10px;
   margin-left: 5px;
   margin-right: 5px;

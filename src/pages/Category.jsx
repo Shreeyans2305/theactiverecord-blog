@@ -10,7 +10,7 @@ const Category = () => {
 
   useEffect(() => {
     const loadPosts = async () => {
-      const files = import.meta.glob("../posts/*.md", { as: "raw" }) 
+      const files = import.meta.glob("../posts/*.md", { query: "?raw", import: "default" }) 
       const selected = []
 
       for (const path in files) {
@@ -59,7 +59,14 @@ const record = {
     return (
         <>
         <h2 className='heading'>{record[category]?.name} Blogs</h2>
-        <img src={record[category]?.banner} alt={`${category} banner`} className="category-banner" />
+        <img
+          src={record[category]?.banner}
+          alt={`${category} banner`}
+          className="category-banner"
+          width="1600"
+          height="500"
+          decoding="async"
+        />
         
         <h2 className='reason'>Why I write about {record[category]?.n2}</h2>
         <p className='quote-text'>{record[category]?.quote}</p>

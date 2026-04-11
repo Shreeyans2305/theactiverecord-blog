@@ -14,7 +14,7 @@ const Highlights = () => {
 
   useEffect(() => {
     const loadPosts = async () => {
-      const files = import.meta.glob("../posts/*.md", { as: "raw" }) 
+      const files = import.meta.glob("../posts/*.md", { query: "?raw", import: "default" }) 
       const selected = []
 
       for (const path in files) {

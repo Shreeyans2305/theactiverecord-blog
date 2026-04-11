@@ -30,7 +30,16 @@ const Header = () => {
     <>
     <div className="top-bar">
     <nav className='navigation'>
-      <img src={logoImage} alt="tar logo" className='hello' onClick={handleButtonClick}></img>
+      <img
+        src={logoImage}
+        alt="tar logo"
+        className='hello'
+        width="100"
+        height="100"
+        decoding="async"
+        fetchPriority="high"
+        onClick={handleButtonClick}
+      />
       <button className='nav-button' onClick={() => setIsOpen(true)}>☰</button>
       <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </nav>

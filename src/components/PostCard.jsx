@@ -4,7 +4,15 @@ function PostCard({ post }) {
   return (
     <motion.div className="tile" whileHover={{ scale: 1.05, backgroundColor:"#eaff00" }}>
     <article>
-      <img src={post.cover} alt={post.title} className="ipostcard"/>
+      <img
+        src={post.cover}
+        alt={post.title}
+        className="ipostcard"
+        width="250"
+        height="250"
+        loading="lazy"
+        decoding="async"
+      />
       {post.keywords.map((keyword) => (
         <p className="hash" key={keyword}>{keyword}</p>
       ))}
