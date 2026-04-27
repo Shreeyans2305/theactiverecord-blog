@@ -1,14 +1,7 @@
 import PostCard from './PostCard'
 import { motion } from "motion/react"
-import matter from "gray-matter"
 import { useEffect, useState } from "react"
-
-const getRawMarkdown = (loaded) => {
-  if (typeof loaded === "string") return loaded
-  if (typeof loaded?.default === "string") return loaded.default
-  if (typeof loaded?.default?.default === "string") return loaded.default.default
-  return ""
-}
+import { loadPostsIndex } from '../lib/postsIndex'
 
 const Highlights = () => {
  const [posts, setPosts] = useState([])
@@ -17,22 +10,11 @@ const Highlights = () => {
   useEffect(() => {
     const loadPosts = async () => {
       try {
-        const files = import.meta.glob("../posts/*.md", { as: "raw" })
-        const selected = []
+        const allPosts = await loadPostsIndex()
+        const selected = allPosts
+          .filter((post) => post.featured)
+          .sort((a, b) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER))
 
-        for (const path in files) {
-          try {
-            const loaded = await files[path]()
-            const raw = getRawMarkdown(loaded)
-            if (!raw) continue
-            const { data } = matter(raw)
-            if (data.featured) selected.push(data)
-          } catch {
-            continue
-          }
-        }
-
-        selected.sort((a, b) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER))
         setPosts(selected.slice(0, 4))
       } finally {
         setIsLoading(false)
@@ -53,8 +35,13 @@ const Highlights = () => {
       }}
         className="post-container"
     >
-    {posts.length > 0 ? posts.map(post => (
-        <PostCard key={post.slug} post={post} />
+    {posts.length > 0 ? posts.map((post, index) => (
+        <PostCard
+          key={post.slug}
+          post={post}
+          imageLoading={index < 2 ? "eager" : "lazy"}
+          imageFetchPriority={index === 0 ? "high" : "auto"}
+        />
       )) : <p>{isLoading ? "Loading latest entries…" : "No featured entries found."}</p>}
     </motion.div>
     </>

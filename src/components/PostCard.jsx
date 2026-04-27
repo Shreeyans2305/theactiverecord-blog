@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { motion } from "motion/react"
-function PostCard({ post }) {
+function PostCard({ post, imageLoading = "lazy", imageFetchPriority = "auto" }) {
   return (
     <motion.div className="tile" whileHover={{ scale: 1.05, backgroundColor:"#eaff00" }}>
     <article>
@@ -10,7 +10,8 @@ function PostCard({ post }) {
         className="ipostcard"
         width="250"
         height="250"
-        loading="lazy"
+        loading={imageLoading}
+        fetchPriority={imageFetchPriority}
         decoding="async"
       />
       {post.keywords.map((keyword) => (

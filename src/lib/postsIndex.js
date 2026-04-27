@@ -14,32 +14,37 @@ export const loadPostsIndex = async () => {
 
   postsIndexPromise = (async () => {
     const files = import.meta.glob('../posts/*.md', { as: 'raw' })
-    const posts = []
+    const entries = Object.entries(files)
 
-    for (const path in files) {
-      try {
-        const loaded = await files[path]()
-        const raw = getRawMarkdown(loaded)
-        if (!raw) continue
+    const parsed = await Promise.all(
+      entries.map(async ([, loader]) => {
+        try {
+          const loaded = await loader()
+          const raw = getRawMarkdown(loaded)
+          if (!raw) return null
 
-        const { data } = matter(raw)
-        if (!data?.slug || !data?.title) continue
+          const { data } = matter(raw)
+          if (!data?.slug || !data?.title) return null
 
-        posts.push({
-          slug: data.slug,
-          title: data.title,
-          excerpt: data.excerpt || '',
-          cover: data.cover || '',
-          date: data.date || '',
-          readingTime: data.readingTime || '',
-          keywords: Array.isArray(data.keywords) ? data.keywords : []
-        })
-      } catch {
-        continue
-      }
-    }
+          return {
+            slug: data.slug,
+            title: data.title,
+            excerpt: data.excerpt || '',
+            cover: data.cover || '',
+            date: data.date || '',
+            readingTime: data.readingTime || '',
+            keywords: Array.isArray(data.keywords) ? data.keywords : [],
+            featured: Boolean(data.featured),
+            order: Number.isFinite(Number(data.order)) ? Number(data.order) : Number.MAX_SAFE_INTEGER,
+            category: data.category || ''
+          }
+        } catch {
+          return null
+        }
+      })
+    )
 
-    return posts
+    return parsed.filter(Boolean)
   })()
 
   return postsIndexPromise

@@ -168,7 +168,7 @@ const Header = () => {
         width="100"
         height="100"
         decoding="async"
-        fetchPriority="high"
+        fetchPriority="auto"
         onClick={handleButtonClick}
       />
       <div className="header-controls">

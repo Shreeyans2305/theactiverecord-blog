@@ -23,16 +23,18 @@ const Hero = () => {
         }
         >
           <picture>
-            <source media="(max-width: 768px)" srcSet="/Hero3.png" />
-            <source media="(max-width: 1200px)" srcSet="/Hero4.png" />
+            <source media="(max-width: 768px)" srcSet="/Hero3.png" sizes="100vw" />
+            <source media="(max-width: 1200px)" srcSet="/Hero4.png" sizes="100vw" />
           <img
             src="/Hero.png"
             alt="Hero"
             className="hero-image"
             width="1200"
             height="675"
+            loading="eager"
             decoding="async"
             fetchPriority="high"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
           />
           </picture>
         </motion.div>
