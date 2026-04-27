@@ -1,11 +1,4 @@
-import matter from 'gray-matter'
-
-const getRawMarkdown = (loaded) => {
-  if (typeof loaded === 'string') return loaded
-  if (typeof loaded?.default === 'string') return loaded.default
-  if (typeof loaded?.default?.default === 'string') return loaded.default.default
-  return ''
-}
+import { parseLoadedPost } from './postMeta'
 
 let postsIndexPromise
 
@@ -13,31 +6,18 @@ export const loadPostsIndex = async () => {
   if (postsIndexPromise) return postsIndexPromise
 
   postsIndexPromise = (async () => {
-    const files = import.meta.glob('../posts/*.md', { as: 'raw' })
+    const files = import.meta.glob('../posts/*.md', { query: '?raw', import: 'default' })
     const entries = Object.entries(files)
 
     const parsed = await Promise.all(
       entries.map(async ([, loader]) => {
         try {
           const loaded = await loader()
-          const raw = getRawMarkdown(loaded)
-          if (!raw) return null
+          const post = parseLoadedPost(loaded)
+          if (!post?.slug || !post?.title) return null
 
-          const { data } = matter(raw)
-          if (!data?.slug || !data?.title) return null
-
-          return {
-            slug: data.slug,
-            title: data.title,
-            excerpt: data.excerpt || '',
-            cover: data.cover || '',
-            date: data.date || '',
-            readingTime: data.readingTime || '',
-            keywords: Array.isArray(data.keywords) ? data.keywords : [],
-            featured: Boolean(data.featured),
-            order: Number.isFinite(Number(data.order)) ? Number(data.order) : Number.MAX_SAFE_INTEGER,
-            category: data.category || ''
-          }
+          const { frontmatter, content, ...meta } = post
+          return meta
         } catch {
           return null
         }

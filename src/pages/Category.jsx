@@ -1,16 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import PostCard from '../components/PostCard.jsx'
-import matter from 'gray-matter'
 import './category.css'
 import AutoButton from '../components/AutoButton.jsx'
-
-const getRawMarkdown = (loaded) => {
-  if (typeof loaded === "string") return loaded
-  if (typeof loaded?.default === "string") return loaded.default
-  if (typeof loaded?.default?.default === "string") return loaded.default.default
-  return ""
-}
+import { loadPostsIndex } from '../lib/postsIndex.js'
 
 const Category = () => {
   const { category } = useParams()
@@ -18,20 +11,8 @@ const Category = () => {
 
   useEffect(() => {
     const loadPosts = async () => {
-      const files = import.meta.glob("../posts/*.md", { as: "raw" })
-      const selected = []
-
-      for (const path in files) {
-      try {
-        const loaded = await files[path]()
-        const raw = getRawMarkdown(loaded)
-        if (!raw) continue
-        const { data } = matter(raw)
-        if (data.category === category) selected.push(data)
-      } catch {
-        continue
-      }
-      }
+      const allPosts = await loadPostsIndex()
+      const selected = allPosts.filter((post) => post.category === category)
       setPosts(selected)
     }
 

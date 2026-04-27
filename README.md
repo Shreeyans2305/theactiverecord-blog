@@ -5,6 +5,8 @@
 
 > A personal, evolving digital journal — documenting ideas, learning, and curiosity.
 
+![Welcome](/public/preview.png)
+
 **The Active Record** is my personal blog and digital space where I document my journey through technology, research, writing, and everything that keeps my brain awake at 2 AM.
 This project is not just a blog — it’s an archive of growth, curiosity, and experimentation.
 
@@ -22,6 +24,8 @@ This project is not just a blog — it’s an archive of growth, curiosity, and 
 * I really wanted to make a serious ***website*** with React
 * It lets me learn by **building everything myself**
 
+![NewsBulletin](/public/preview3.png)
+
 This repository documents that journey — technically and personally.
 
 ---
@@ -29,6 +33,9 @@ This repository documents that journey — technically and personally.
 ## What You’ll Find Here
 
 * Articles written in **Markdown**
+
+![PostPreview](/public/preview2.png)
+
 * Topics ranging from:
 
   * Technology & Software Engineering
@@ -80,13 +87,14 @@ Each post is a Markdown file with frontmatter:
 ---
 title: "My First Post"
 date: "2026-01-10"
-readingTime: "5 min read"
 ---
 
 # Hello World
 
 This is my first post on The Active Record.
 ```
+
+`readingTime` is now auto-calculated from the markdown content, so you don't need to add it manually.
 
 Routing is automatically handled using the filename as the slug.
 
@@ -113,6 +121,38 @@ Routing is automatically handled using the filename as the slug.
 * Search & tag system
 * Reading analytics
 * Writing dashboard
+
+---
+
+## Comments & Likes (Giscus)
+
+This project uses Giscus for both:
+
+* Comments
+* Likes (via GitHub reactions)
+
+### Setup steps
+
+1. Enable **GitHub Discussions** in your repository settings.
+2. Install the **Giscus GitHub App** for your repository.
+3. Create a Discussions category (for example: `Comments`).
+4. Go to [https://giscus.app](https://giscus.app) and generate values for:
+  * `repo`
+  * `repoId`
+  * `category`
+  * `categoryId`
+5. Add these to your `.env` file:
+
+```
+VITE_GISCUS_REPO=owner/repo
+VITE_GISCUS_REPO_ID=R_kgDOxxxxxx
+VITE_GISCUS_CATEGORY=Comments
+VITE_GISCUS_CATEGORY_ID=DIC_kwDOxxxxxx
+```
+
+6. Restart the dev server after updating `.env`.
+
+Without these variables, posts will show a configuration hint instead of the embed.
 
 ---
 

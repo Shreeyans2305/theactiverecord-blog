@@ -78,7 +78,7 @@ const Footer = () => {
       Got any <span className="dynamic">{word}</span>
       <span className="cursor">|</span>
       <br />
-      <span className="subtext">Feel free to reach out through the Socials</span>
+      <span className="subtext">Feel free to reach out through the Socials or Fill the Form below!!</span>
     </h2>
     <div className="feedback-form-wrap">
       <iframe
