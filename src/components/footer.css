@@ -4,6 +4,33 @@
   margin-left: 50px;
 }
 
+.feedback-form-wrap {
+  width: min(980px, calc(100% - 3rem));
+  margin: 2rem auto 1.5rem;
+}
+
+.feedback-form-iframe {
+  display: block;
+  width: 100%;
+  min-height: 860px;
+  border: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  .feedback-form-wrap {
+    width: calc(100% - 1.5rem);
+    margin: 1.25rem auto 1rem;
+  }
+
+  .feedback-form-iframe {
+    min-height: 920px;
+    border-radius: 10px;
+  }
+}
+
 .dynamic {
   white-space: nowrap;
 }

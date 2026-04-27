@@ -15,9 +15,7 @@ const Footer = () => {
   const [word, setWord] = useState("")
   const [wordIndex, setWordIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [message, setMessage] = useState("")
+  const tallySrc = "https://tally.so/embed/rj0vBX?alignLeft=1&transparentBackground=1&dynamicHeight=1"
 
 
   useEffect(() => {
@@ -42,7 +40,35 @@ const Footer = () => {
     return () => clearTimeout(timeout)
   }, [word, isDeleting, wordIndex])
 
+  useEffect(() => {
+    const scriptSrc = "https://tally.so/widgets/embed.js"
 
+    const mountEmbeds = () => {
+      if (window.Tally?.loadEmbeds) {
+        window.Tally.loadEmbeds()
+        return
+      }
+
+      document
+        .querySelectorAll("iframe[data-tally-src]:not([src])")
+        .forEach((iframe) => {
+          iframe.src = iframe.dataset.tallySrc
+        })
+    }
+
+    const existing = document.querySelector(`script[src="${scriptSrc}"]`)
+    if (existing) {
+      mountEmbeds()
+      return
+    }
+
+    const script = document.createElement("script")
+    script.src = scriptSrc
+    script.async = true
+    script.onload = mountEmbeds
+    script.onerror = mountEmbeds
+    document.body.appendChild(script)
+  }, [])
 
   return (
     <>
@@ -54,7 +80,24 @@ const Footer = () => {
       <br />
       <span className="subtext">Feel free to reach out through the Socials</span>
     </h2>
-
+    <div className="feedback-form-wrap">
+      <iframe
+        src={tallySrc}
+        data-tally-src={tallySrc}
+        className="feedback-form-iframe"
+        loading="lazy"
+        width="100%"
+        height="860"
+        frameBorder="0"
+        marginHeight="0"
+        marginWidth="0"
+        scrolling="no"
+        title="Reach Out!!"
+      ></iframe>
+      <noscript>
+        <a href={tallySrc} target="_blank" rel="noreferrer">Open contact form</a>
+      </noscript>
+    </div>
     </div>
     <div className="footer-socials" id="contact">
     <a href="https://github.com/Shreeyans2305" target="_blank" rel="noreferrer" className="link"><FaGithub /></a>
