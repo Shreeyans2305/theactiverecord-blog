@@ -34,19 +34,193 @@ html, body {
   height: 100px; 
   justify-content: center;
 }
-.nav-button {
+
+.navigation {
+  position: relative;
+  min-height: 110px;
+}
+
+.header-controls {
   position: absolute;
-  top: 1.7vh;
-  right: 5vh;
-  padding: 10px 15px;
-  font-size: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  z-index: 6;
+}
+
+.nav-button {
+  position: relative;
+  width: 48px;
+  height: 60px;
+  min-width: 48px;
+  min-height: 60px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  line-height: 0;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  border: none;
-  border-radius: 5px;
+  border: 2px var(--border);
+  border-radius: 12px;
   cursor: pointer;
-  margin-right: 2vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-search-toggle {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px var(--border);
+  border-radius: 12px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 0;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-button svg,
+.header-search-toggle svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.header-search-input {
+  width: 0;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: width 0.28s ease, opacity 0.2s ease, padding 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  max-width: calc(100vw - 210px);
+  min-width: 0;
+}
+
+.header-search-wrap.expanded .header-search-input {
+  width: min(42vw, 420px);
+  opacity: 1;
+  pointer-events: auto;
+  padding: 0 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.header-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(42vw, 420px);
+  max-height: 420px;
+  overflow-y: auto;
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+  z-index: 10020;
+}
+
+.header-search-item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 20%, transparent);
+}
+
+.header-search-item:last-child {
+  border-bottom: none;
+}
+
+.header-search-item:hover,
+.header-search-item.active {
+  background: color-mix(in srgb, var(--accent) 20%, var(--bg-primary));
+}
+
+.header-search-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.header-search-excerpt {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.header-search-empty {
+  margin: 0;
+  padding: 12px 14px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .header-controls {
+    right: 0.6rem;
+    gap: 0.5rem;
+  }
+
+  .header-search-wrap.expanded .header-search-input {
+    width: min(56vw, 340px);
+  }
+
+  .header-search-input {
+    height: 44px;
+    font-size: 0.88rem;
+  }
+
+  .header-search-toggle,
+  .nav-button {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .header-search-results {
+    width: min(56vw, 340px);
+  }
 }
 
 /* Container styles */
